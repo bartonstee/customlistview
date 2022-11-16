@@ -1,5 +1,6 @@
 import { PureComponent, ReactNode, createElement, createRef } from "react";
-import { View, FlatList, ScrollView, TouchableOpacity, Text, ViewStyle } from "react-native";
+import { View, TouchableOpacity, Text, ViewStyle, Dimensions } from "react-native";
+import { FlatList, ScrollView } from "react-native-gesture-handler";
 import { ObjectItem } from "mendix";
 import { Big } from "big.js"
 
@@ -7,6 +8,7 @@ import { CustomListViewProps } from "../typings/CustomListViewProps"
 import { Style, mergeNativeStyles } from '@mendix/pluggable-widgets-tools';
 
 let clickTimer: number;
+let ScreenHeight = Dimensions.get("window").height;
 
 export interface CustomStyle extends Style {
     footer: ViewStyle
@@ -14,7 +16,7 @@ export interface CustomStyle extends Style {
 
 const defaultStyle: CustomStyle = {
     footer: {
-        marginBottom: 300,
+        marginBottom: ScreenHeight * 0.1,
     }
 };
 
@@ -68,6 +70,7 @@ export class CustomListView extends PureComponent<CustomListViewProps<CustomStyl
                         ListEmptyComponent={this.renderEmptyHandler()}
                         maxToRenderPerBatch={maxNumberToRenderPerBatch}
                         ListFooterComponent={this.renderFooterHandler()}
+                        canCancelContentTouches={true}
                     />
                     :
                     <FlatList

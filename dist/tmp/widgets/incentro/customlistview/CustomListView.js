@@ -236,25 +236,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_native__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-native */ "react-native");
 /* harmony import */ var react_native__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_native__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var big_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! big.js */ "big.js");
-/* harmony import */ var big_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(big_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @mendix/pluggable-widgets-tools */ "./node_modules/@mendix/pluggable-widgets-tools/dist/index.js");
-/* harmony import */ var _mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_native_gesture_handler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-native-gesture-handler */ "react-native-gesture-handler");
+/* harmony import */ var react_native_gesture_handler__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_native_gesture_handler__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var big_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! big.js */ "big.js");
+/* harmony import */ var big_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(big_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @mendix/pluggable-widgets-tools */ "./node_modules/@mendix/pluggable-widgets-tools/dist/index.js");
+/* harmony import */ var _mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
 
 let clickTimer;
+let ScreenHeight = react_native__WEBPACK_IMPORTED_MODULE_1__["Dimensions"].get("window").height;
 const defaultStyle = {
     footer: {
-        marginBottom: 300,
+        marginBottom: ScreenHeight * 0.1,
     }
 };
 class CustomListView extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"] {
     constructor(props) {
         var _a;
         super(props);
-        this.styles = Object(_mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_3__["mergeNativeStyles"])(defaultStyle, this.props.style);
+        this.styles = Object(_mendix_pluggable_widgets_tools__WEBPACK_IMPORTED_MODULE_4__["mergeNativeStyles"])(defaultStyle, this.props.style);
         this.renderFlatListHandler = this.renderFlatList.bind(this);
         this.renderScrollViewHandler = this.renderScrollView.bind(this);
         this.onClickHandler = this.onClick.bind(this);
@@ -286,20 +290,20 @@ class CustomListView extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]
         const { ds, windowSize, initialNumToRender, removeClippedSubviews, maxNumberToRenderPerBatch, cellBatchingSize, useItemLayout, itemSize } = this.props;
         const size = Number(itemSize);
         return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["View"], null, useItemLayout ?
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["FlatList"], { getItemLayout: (data, index) => ({
+            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native_gesture_handler__WEBPACK_IMPORTED_MODULE_2__["FlatList"], { getItemLayout: (data, index) => ({
                     length: size,
                     offset: size * index,
                     index,
                     data
-                }), ref: this.flatListRef, data: ds === null || ds === void 0 ? void 0 : ds.items, renderItem: this.renderItem, windowSize: windowSize, initialNumToRender: initialNumToRender, removeClippedSubviews: removeClippedSubviews, ListEmptyComponent: this.renderEmptyHandler(), maxToRenderPerBatch: maxNumberToRenderPerBatch, ListFooterComponent: this.renderFooterHandler() })
+                }), ref: this.flatListRef, data: ds === null || ds === void 0 ? void 0 : ds.items, renderItem: this.renderItem, windowSize: windowSize, initialNumToRender: initialNumToRender, removeClippedSubviews: removeClippedSubviews, ListEmptyComponent: this.renderEmptyHandler(), maxToRenderPerBatch: maxNumberToRenderPerBatch, ListFooterComponent: this.renderFooterHandler(), canCancelContentTouches: true })
             :
-                Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["FlatList"], { data: ds === null || ds === void 0 ? void 0 : ds.items, renderItem: this.renderItem, windowSize: windowSize, initialNumToRender: initialNumToRender, removeClippedSubviews: removeClippedSubviews, ListEmptyComponent: this.renderEmptyHandler(), maxToRenderPerBatch: maxNumberToRenderPerBatch, ListFooterComponent: this.renderFooterHandler(), updateCellsBatchingPeriod: cellBatchingSize })));
+                Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native_gesture_handler__WEBPACK_IMPORTED_MODULE_2__["FlatList"], { data: ds === null || ds === void 0 ? void 0 : ds.items, renderItem: this.renderItem, windowSize: windowSize, initialNumToRender: initialNumToRender, removeClippedSubviews: removeClippedSubviews, ListEmptyComponent: this.renderEmptyHandler(), maxToRenderPerBatch: maxNumberToRenderPerBatch, ListFooterComponent: this.renderFooterHandler(), updateCellsBatchingPeriod: cellBatchingSize })));
     }
     renderScrollView() {
         var _a;
         const { ds, container } = this.props;
         return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["View"], null,
-            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["ScrollView"], null, (_a = ds.items) === null || _a === void 0 ? void 0 : _a.map((item) => Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["View"], { key: item.id }, container(item))))));
+            Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native_gesture_handler__WEBPACK_IMPORTED_MODULE_2__["ScrollView"], null, (_a = ds.items) === null || _a === void 0 ? void 0 : _a.map((item) => Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["View"], { key: item.id }, container(item))))));
     }
     renderFooter() {
         return Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(react_native__WEBPACK_IMPORTED_MODULE_1__["View"], { style: this.styles.footer });
@@ -315,7 +319,7 @@ class CustomListView extends react__WEBPACK_IMPORTED_MODULE_0__["PureComponent"]
         if (!this.state.clickDisabled) {
             this.setState({ clickDisabled: true });
             actionValue.execute();
-            scrollItem === null || scrollItem === void 0 ? void 0 : scrollItem.setValue(new big_js__WEBPACK_IMPORTED_MODULE_2__["Big"](index));
+            scrollItem === null || scrollItem === void 0 ? void 0 : scrollItem.setValue(new big_js__WEBPACK_IMPORTED_MODULE_3__["Big"](index));
             clickTimer = setTimeout(() => {
                 this.setState({ clickDisabled: false });
             }, 3000);
@@ -371,6 +375,17 @@ module.exports = require("react");
 /***/ (function(module, exports) {
 
 module.exports = require("react-native");
+
+/***/ }),
+
+/***/ "react-native-gesture-handler":
+/*!***********************************************!*\
+  !*** external "react-native-gesture-handler" ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-native-gesture-handler");
 
 /***/ })
 
