@@ -13,9 +13,7 @@ export interface CustomStyle extends Style {
 }
 
 const defaultStyle: CustomStyle = {
-    footer: {
-        marginBottom: 300,
-    }
+    footer: { marginBottom: 0 }
 };
 
 interface State {
@@ -51,14 +49,14 @@ export class CustomListView extends PureComponent<CustomListViewProps<CustomStyl
         const size = Number(itemSize)
         return (
             <View>
-                {useItemLayout ?
+                {useItemLayout ? (
                     <FlatList
-                        getItemLayout={(data, index) => ({
+                        getItemLayout={(data: any, index: number) => ({
                             length: size,
                             offset: size * index,
                             index,
                             data
-                            })}
+                        })}
                         ref={this.flatListRef}
                         data={ds?.items}
                         renderItem={this.renderItem}
@@ -69,7 +67,7 @@ export class CustomListView extends PureComponent<CustomListViewProps<CustomStyl
                         maxToRenderPerBatch={maxNumberToRenderPerBatch}
                         ListFooterComponent={this.renderFooterHandler()}
                     />
-                    :
+                ) : (
                     <FlatList
                         data={ds?.items}
                         renderItem={this.renderItem}
@@ -81,7 +79,7 @@ export class CustomListView extends PureComponent<CustomListViewProps<CustomStyl
                         ListFooterComponent={this.renderFooterHandler()}
                         updateCellsBatchingPeriod={cellBatchingSize}
                     />
-                }
+                )}
             </View>
         );
     }
@@ -91,18 +89,18 @@ export class CustomListView extends PureComponent<CustomListViewProps<CustomStyl
         return (
             <View>
                 <ScrollView>
-                    {ds.items?.map((item) => <View key={item.id}>{container(item)}</View>)}
+                    {ds.items?.map((item: { id: any; }) => <View key={item.id}>{container.get(item)}</View>)}
                 </ScrollView>
             </View>
         );
     }
-
+    
     renderItem = ({ item, index }: { item: ObjectItem, index: number }) => {
         const { container, useItemLayout, itemSize } = this.props;
         return (
             <View>
             <TouchableOpacity onPress={() => this.onClickHandler(item, index)} disabled={this.state.clickDisabled}>
-            <View key={item.id} style={useItemLayout ? { height: Number(itemSize) } : null}>{container(item)}</View>
+            <View key={item.id} style={useItemLayout ? { height: Number(itemSize) } : null}>{container.get(item)}</View>
             </TouchableOpacity>
         </View>
         )
@@ -125,14 +123,11 @@ export class CustomListView extends PureComponent<CustomListViewProps<CustomStyl
 
     onClick(item: ObjectItem, index: number) {
         const { onClick, scrollItem } = this.props;
-        const actionValue = onClick!(item);
         if (!this.state.clickDisabled) {
             this.setState({ clickDisabled: true });
-            actionValue.execute();
+            onClick?.get(item)?.execute();
             scrollItem?.setValue(new Big(index));
-            clickTimer = setTimeout(() => {
-                this.setState({ clickDisabled: false });
-            }, 3000);
+            clickTimer = window.setTimeout(() => this.setState({ clickDisabled: false }), 3000);
         }
     }
 
